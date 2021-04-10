@@ -16,6 +16,12 @@ const handleRequest = async (req, res) => {
     });
 };
 
+const handleRedirect = (req, res) => {
+    const redirectUrl = 'https://picsum.photos/280/140';
+    res.redirect(redirectUrl);
+}
+
 module.exports = {
-    handleRequest
+    handleRequest,
+    handleRedirect
 };

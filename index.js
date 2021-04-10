@@ -11,6 +11,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/:x/:y/image.jpg", handlers.handleRequest);
+app.get("/r/:x/:y/image.jpg", handlers.handleRedirect);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
