@@ -5,7 +5,7 @@ const pug = require("pug");
 const handlers = require("./handlers.js");
 
 const app = express();
-const port = 3000;
+const port = 9998;
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
