@@ -34,7 +34,8 @@ const getImageFolderPath = (imageName, totalX, totalY) => {
 const splitImage = async (image, imageName, wSplits, hSplits) => {
     const w = smallestDivisibleByK(image.bitmap.width, wSplits);
     const h = smallestDivisibleByK(image.bitmap.height, hSplits);
-    await image.scaleToFit(w, h);
+
+    await image.resize(w, h, Jimp.AUTO);
 
     const [splitW, splitH] = splitDimensions(w, h, wSplits, hSplits);
     
