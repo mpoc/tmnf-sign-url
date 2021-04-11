@@ -3,7 +3,7 @@ const Jimp = require("jimp");
 const { resolve } = require("path");
 const fs = require("fs");
 
-const imageNameMap = {};
+const imageNameMap = require("./image-name-map.json");
 
 const smallestDivisibleByK = (startNum, k) => {
     if (startNum % k == 0) {
