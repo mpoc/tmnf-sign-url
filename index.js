@@ -1,18 +1,19 @@
 const express = require('express');
 const path = require('path');
-const pug = require("pug");
+// const pug = require("pug");
 
 const handlers = require("./handlers.js");
 
 const app = express();
 const port = 9998;
 
-app.set("view engine", "pug");
-app.set("views", path.join(__dirname, "views"));
+// app.set("view engine", "pug");
+// app.set("views", path.join(__dirname, "views"));
 
-app.get("/:x/:y/image.jpg", handlers.handleRequest);
-app.get("/r/:x/:y/image.jpg", handlers.handleRedirect);
+app.get("/i/:totalX/:totalY/:x/:y/:imageName", handlers.handleImage);
+app.get("/v/:totalX/:totalY/:x/:y/:videoName", handlers.handleVideo);
+app.get("/r/:ngrok/:rest", handlers.handleRedirect);
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });
