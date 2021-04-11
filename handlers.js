@@ -66,14 +66,14 @@ const imageExists = async (imageName, totalX, totalY) => {
 };
 
 const handleImage = async (req, res) => {
-    const rawImageName = req.params.imageName;
+    const imageName = req.params.imageName;
 
-    if (!(rawImageName in imageNameMap)) {
+    if (!(imageName in imageNameMap)) {
         res.sendStatus(404);
         return;
     }
 
-    const imageName = imageNameMap[rawImageName];
+    const jimpImageName = imageNameMap[imageName];
     const totalX = Number(req.params.totalX);
     const totalY = Number(req.params.totalY);
     const x = Number(req.params.x);
@@ -85,12 +85,12 @@ const handleImage = async (req, res) => {
     }
     
     if (!(await imageExists(imageName, totalX, totalY))) {
-        const image = await Jimp.read(imageName).catch((err) => { console.error(err) });
+        const image = await Jimp.read(jimpImageName).catch((err) => { console.error(err) });
         await splitImage(image, imageName, totalX, totalY);
     }
 
     const imageFilename = getImageFilePath(imageName, totalX, totalY, x, y);
-    console.log({ rawImageName, imageName, totalX, totalY, x, y, imageFilename });
+    console.log({ imageName, jimpImageName, totalX, totalY, x, y, imageFilename });
 
     res.sendFile(imageFilename);
 };
