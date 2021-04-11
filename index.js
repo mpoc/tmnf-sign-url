@@ -12,7 +12,7 @@ const port = 9998;
 
 app.get("/i/:totalX/:totalY/:x/:y/:imageName", handlers.handleImage);
 app.get("/v/:totalX/:totalY/:x/:y/:videoName", handlers.handleVideo);
-app.get("/r/:ngrok/:rest", handlers.handleRedirect);
+app.get("/r/:ngrok/:rest*", handlers.handleRedirect);
 
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
