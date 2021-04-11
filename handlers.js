@@ -4,6 +4,7 @@ const { resolve } = require("path");
 const fs = require("fs");
 
 const imageNameMap = require("./image-name-map.json");
+let imageBeingProcessed = false;
 
 const smallestDivisibleByK = (startNum, k) => {
     if (startNum % k == 0) {
@@ -32,6 +33,8 @@ const getImageFolderPath = (imageName, totalX, totalY) => {
 };
 
 const splitImage = async (image, imageName, wSplits, hSplits) => {
+    imageBeingProcessed = true;
+
     const w = smallestDivisibleByK(image.bitmap.width, wSplits);
     const h = smallestDivisibleByK(image.bitmap.height, hSplits);
 
@@ -52,6 +55,8 @@ const splitImage = async (image, imageName, wSplits, hSplits) => {
             await clonedImage.writeAsync(getImageFilePath(imageName, wSplits, hSplits, x + 1, y + 1));
         }
     }
+
+    imageBeingProcessed = false;
     // return croppedImages;
 };
 
@@ -84,6 +89,9 @@ const handleImage = async (req, res) => {
         res.sendStatus(404);
         return;
     }
+
+    // Block subsequent requests
+    while (imageBeingProcessed) {}
     
     if (!(await imageExists(imageName, totalX, totalY))) {
         const image = await Jimp.read(jimpImageName).catch((err) => { console.error(err) });
