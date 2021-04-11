@@ -106,7 +106,7 @@ const handleVideo = async (req, res) => {
 
 const handleRedirect = (req, res) => {
     const ngrok = req.params.ngrok;
-    const rest = req.params.rest;
+    const rest = req.params[0];
     const redirectUrl = `http://${ngrok}.ngrok.io/${rest}`;
     res.redirect(redirectUrl);
 }
