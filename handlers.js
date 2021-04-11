@@ -64,7 +64,6 @@ const imageExists = async (imageName, totalX, totalY) => {
     const imageFolderName = getImageFolderPath(imageName, totalX, totalY);
     try {
         await fs.promises.access(imageFolderName);
-        console.log('exists');
         return true;
     } catch (error) {
         return false;
