@@ -123,7 +123,7 @@ const handleImage = async (req, res) => {
     }
 
     const imageFilename = getImageFilePath(imageName, totalX, totalY, x, y);
-    console.log({ imageName, jimpImageName, totalX, totalY, x, y, imageFilename });
+    console.log({ imageName, imageLocation, totalX, totalY, x, y, imageFilename });
 
     res.sendFile(imageFilename);
 };
